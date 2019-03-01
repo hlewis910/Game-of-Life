@@ -18,7 +18,13 @@ class GameOfLife {
   }
 
   getCell(row, col) {
-    if (this.board[row][col] === undefined) {
+    // if (this.board[row][col] === undefined) {
+    //   return 0;
+    // }
+    if (row < 0 || row > this.height) {
+      return 0;
+    }
+    if (col < 0 || col > this.width) {
       return 0;
     } else {
       return this.board[row][col];
@@ -26,24 +32,32 @@ class GameOfLife {
   }
 
   setCell(value, row, col) {
-    if (this.board[row][col] === undefined) {
+    if (row < 0 || row > this.height) {
+      return 0;
+    }
+    if (col < 0 || col > this.width) {
       return 0;
     } else {
-      const cellVal = this.board[row][col] = value;
+      const cellVal = (this.board[row][col] = value);
       return cellVal;
     }
   }
 
   toggleCell(row, col) {
-    if (this.board[row][col] === undefined) {
-      return 'error'
-    } else if (this.board[row][col] === 0){
-      return this.board[row][col] = 1;
+    // if (this.board[row][col] === undefined) {
+    //   return 'error!!!!';
+    // }
+    // if (row < 0 || row > this.height) {
+    //   row = undefined;
+    // }
+    // if (col < 0 || col > this.width) {
+    //   col = undefined;}
+    if (this.board[row][col] === 0) {
+      return (this.board[row][col] = 1);
     } else {
-      return this.board[row][col] = 0;
+      return (this.board[row][col] = 0);
     }
   }
-
 
   /**
    * Return the amount of living neighbors around a given coordinate.
@@ -51,38 +65,38 @@ class GameOfLife {
 
   // eslint-disable-next-line complexity
 
-   // TODO: Return the count of living neighbors.
+  // TODO: Return the count of living neighbors.
   // eslint-disable-next-line complexity
   livingNeighbors(a, b) {
     let counter = 0;
-      if ((getCell([a][b]) === 1)) {
-      counter++
-      }  
-      if ((getCell([a - 1][ b - 1]) === 1)) {
-      counter++
-      }
-      if ((getCell( [a - 1 ][b]) === 1)) {
-      counter++
-      }
-      if ((getCell([a - 1][ b + 1]) === 1)) {
-      counter++
-      }
-      if ((getCell([a][ b - 1]) === 1)) {
-      counter++
-      }
-      if ((getCell([a][ b + 1]) === 1)) {
-      counter++
-      }
-      if ((getCell([ a + 1][b - 1]) === 1)) {
-      counter++
-      }
-      if ((getCell([ a + 1][b]) === 1)) {
-      counter++
-      }
-      if ((getCell([ a + 1][ b + 1]) === 1)) {
-      counter++
-      }
-      return counter;
+    // if (this.getCell(a, b) === 1) {
+    //   counter++;
+    // }
+    if (this.getCell(a - 1, b - 1) === 1) {
+      counter++;
+    }
+    if (this.getCell(a - 1, b) === 1) {
+      counter++;
+    }
+    if (this.getCell(a - 1, b + 1) === 1) {
+      counter++;
+    }
+    if (this.getCell(a, b - 1) === 1) {
+      counter++;
+    }
+    if (this.getCell(a, b + 1) === 1) {
+      counter++;
+    }
+    if (this.getCell(a + 1, b - 1) === 1) {
+      counter++;
+    }
+    if (this.getCell(a + 1, b) === 1) {
+      counter++;
+    }
+    if (this.getCell(a + 1, b + 1) === 1) {
+      counter++;
+    }
+    return counter;
   }
   /**
    * Given the present board, apply the rules to generate a new board
@@ -102,7 +116,7 @@ class GameOfLife {
 
     for (let i = 0; i < this.board.length; i++) {
       for (let j = 0; j < this.board[i].length; j++) {
-          console.log(this.board[i][j]);
+        console.log(this.livingNeighbors(i, j));
       }
     }
     this.board = newBoard;
