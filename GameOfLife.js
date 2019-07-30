@@ -1,63 +1,92 @@
 class GameOfLife {
-  constructor(width, height) {
+  constructor (width, height) {
     this.width = width;
     this.height = height;
     this.board = this.makeBoard();
   }
 
+  // makeBoard() {
+  //   const gameGrid = [];
+  //   for (let i = 0; i < this.height; i++) {
+  //     let row = [];
+  //     gameGrid.push(row);
+  //     for (let j = 0; j < this.width; j++) {
+  //       row.push(0);
+  //     }
+  //   }
+  //   return gameGrid;
+  // }
+
   makeBoard() {
-    const gameGrid = [];
-    for (let i = 0; i < this.height; i++) {
-      let row = [];
-      gameGrid.push(row);
-      for (let j = 0; j < this.width; j++) {
-        row.push(0);
+    return new Array(this.height).fill().map(() =>
+      new Array(this.width).fill(0))
+  }
+
+  cellExists(row, col) {
+    return row >= 0 && row < this.height &&
+           col >= 0 && col < this.width;
+  }
+
+
+  // getCell(row, col) {
+  //   if (row < 0 || row > this.height) {
+  //     return 0;
+  //   }
+  //   if (col < 0 || col > this.width) {
+  //     return 0;
+  //   } else {
+  //     return this.board[row][col];
+  //   }
+  // }
+
+    getCell(row, col) {
+      if (this.cellExists(row, col)) {
+        return this.board[row][col]
+      } else {
+        return 0
       }
     }
-    return gameGrid;
-  }
 
-  getCell(row, col) {
-    // if (this.board[row][col] === undefined) {
-    //   return 0;
-    // }
-    if (row < 0 || row > this.height) {
-      return 0;
-    }
-    if (col < 0 || col > this.width) {
-      return 0;
-    } else {
-      return this.board[row][col];
-    }
-  }
+
+  // setCell(value, row, col) {
+  //   if (row < 0 || row > this.height) {
+  //     return 0;
+  //   }
+  //   if (col < 0 || col > this.width) {
+  //     return 0;
+  //   } else {
+  //     const cellVal = (this.board[row][col] = value);
+  //     return cellVal;
+  //   }
+  // }
+
 
   setCell(value, row, col) {
-    if (row < 0 || row > this.height) {
-      return 0;
-    }
-    if (col < 0 || col > this.width) {
-      return 0;
-    } else {
-      const cellVal = (this.board[row][col] = value);
-      return cellVal;
-    }
+    if (this.cellExists(row,col) {
+      this.board[row][col] = value
+    })
   }
 
+  // toggleCell(row, col) {
+  //   // if (this.board[row][col] === undefined) {
+  //   //   return 'error!!!!';
+  //   // }
+  //   // if (row < 0 || row > this.height) {
+  //   //   row = undefined;
+  //   // }
+  //   // if (col < 0 || col > this.width) {
+  //   //   col = undefined;}
+  //   if (this.board[row][col] === 0) {
+  //     return (this.board[row][col] = 1);
+  //   } else {
+  //     return (this.board[row][col] = 0);
+  //   }
+  // }
+
   toggleCell(row, col) {
-    // if (this.board[row][col] === undefined) {
-    //   return 'error!!!!';
-    // }
-    // if (row < 0 || row > this.height) {
-    //   row = undefined;
-    // }
-    // if (col < 0 || col > this.width) {
-    //   col = undefined;}
-    if (this.board[row][col] === 0) {
-      return (this.board[row][col] = 1);
-    } else {
-      return (this.board[row][col] = 0);
-    }
+    this.setCell(1 - this.getCell(row,col), row, col)
   }
+
 
   /**
    * Return the amount of living neighbors around a given coordinate.
