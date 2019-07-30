@@ -41,9 +41,9 @@ class GameOfLife {
 
     getCell(row, col) {
       if (this.cellExists(row, col)) {
-        return this.board[row][col]
+        return this.board[row][col];
       } else {
-        return 0
+        return 0;
       }
     }
 
@@ -62,9 +62,9 @@ class GameOfLife {
 
 
   setCell(value, row, col) {
-    if (this.cellExists(row,col) {
-      this.board[row][col] = value
-    })
+    if (this.cellExists(row, col)) {
+      this.board[row][col] = value;
+    }
   }
 
   // toggleCell(row, col) {
@@ -84,7 +84,7 @@ class GameOfLife {
   // }
 
   toggleCell(row, col) {
-    this.setCell(1 - this.getCell(row,col), row, col)
+    this.setCell(1 - this.getCell(row, col), row, col);
   }
 
   /**
@@ -146,6 +146,22 @@ class GameOfLife {
       this.getCell(row + 1, col) +
       this.getCell(row + 1, col + 1)
     );
+  }
+
+
+  conwayRule(cell, livingNeighbors) {
+    let isAlive = cell === 1;
+    if (isAlive) {
+      if (livingNeighbors === 2 || livingNeighbors === 3) {
+        return 1;
+      } else {
+        return 0;
+      }
+    } else if (livingNeighbors === 3) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 
 
