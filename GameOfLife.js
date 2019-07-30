@@ -171,9 +171,14 @@ class GameOfLife {
     // 2. Set the next state of all cells in newBoard,
     // based on their current alive neighbors
 
-    for (let i = 0; i < this.board.length; i++) {
-      for (let j = 0; j < this.board[i].length; j++) {
-        console.log(this.livingNeighbors(i, j));
+    // for (let i = 0; i < this.board.length; i++) {
+    //   for (let j = 0; j < this.board[i].length; j++) {
+    //     console.log(this.livingNeighbors(i, j));
+
+    const livingNeighbors = this.livingNeighbors(row, col);
+    const nextCell = this.conwayRule(this.getCell(row, col), livingNeighbors);
+    newBoard[row][col] = nextCell;
+
       }
     }
     this.board = newBoard;
