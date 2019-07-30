@@ -44,8 +44,8 @@ cells.forEach(td => {
     td.classList.add("alive");
   } else {
     td.classList.remove("alive");
-  }
-});
+    }
+  });
 }
 
 
@@ -54,22 +54,22 @@ cells.forEach(td => {
  */
 
 document.getElementById("board").addEventListener("click", (event)=> {
-  gol.toggleCell(event.target.dataset.row, event.target.dataset.col)
-  paint()
+  gol.toggleCell(event.target.dataset.row, event.target.dataset.col);
+  paint();
 });
 
+ // TODO: Do one gol tick and paint
 document.getElementById("step_btn").addEventListener("click", () => {
-  // TODO: Do one gol tick and paint
   gol.tick()
   paint()
 });
 
-let interval = null
-document.getElementById("play_btn").addEventListener("click", () => {
-  // TODO: Start playing by calling `tick` and paint
+// TODO: Start playing by calling `tick` and paint
   // repeatedly every fixed time interval.
   // HINT:
   // https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval
+let interval = null
+document.getElementById("play_btn").addEventListener("click", () => {
   if (!interval) {
     interval = setInterval(() => {
       gol.tick()
@@ -83,16 +83,16 @@ document.getElementById("play_btn").addEventListener("click", () => {
 
 // TODO: Randomize the board and paint
 document.getElementById("random_btn").addEventListener("click", () => {
-gol.forEachCell((row,col) => {
-  gol.setCell(Math.round(Math.random(), row, col)
+gol.forEachCell((row, col) => {
+  gol.setCell(Math.round(Math.random()), row, col);
 })
 paint()
 });
 
   // TODO: Clear the board and paint
-document.getElementById("clear_btn").addEventListener("click", event => {
+document.getElementById("clear_btn").addEventListener("click", () => {
 gol.forEachCell((row, col) => {
-  gol.setCell(0, row, col)
+  gol.setCell(0, row, col);
 })
-paint()
+paint();
 });

@@ -87,9 +87,6 @@ class GameOfLife {
     this.setCell(1 - this.getCell(row,col), row, col)
   }
 
-
-
-
   /**
    * Return the amount of living neighbors around a given coordinate.
    */
@@ -152,16 +149,10 @@ class GameOfLife {
   }
 
 
-
-
-
   /**
    * Given the present board, apply the rules to generate a new board
    */
-
-  tick() {
-    const newBoard = this.makeBoard();
-    // TODO: Here is where you want to loop through all the cells
+  // TODO: Here is where you want to loop through all the cells
     // on the existing board and determine, based on it's neighbors,
     // whether the cell should be dead or alive in the new board
     // (the next iteration of the game)
@@ -171,16 +162,17 @@ class GameOfLife {
     // 2. Set the next state of all cells in newBoard,
     // based on their current alive neighbors
 
+  tick() {
+    const newBoard = this.makeBoard();
+
     // for (let i = 0; i < this.board.length; i++) {
     //   for (let j = 0; j < this.board[i].length; j++) {
     //     console.log(this.livingNeighbors(i, j));
-
+    this.forEachCell((row,col) => {
     const livingNeighbors = this.livingNeighbors(row, col);
     const nextCell = this.conwayRule(this.getCell(row, col), livingNeighbors);
     newBoard[row][col] = nextCell;
-
-      }
-    }
+     })
     this.board = newBoard;
   }
 }
