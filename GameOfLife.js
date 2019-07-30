@@ -88,45 +88,73 @@ class GameOfLife {
   }
 
 
+
+
   /**
    * Return the amount of living neighbors around a given coordinate.
    */
 
-  // eslint-disable-next-line complexity
-
-  // TODO: Return the count of living neighbors.
-  // eslint-disable-next-line complexity
-  livingNeighbors(a, b) {
-    let counter = 0;
+  // livingNeighbors(a, b) {
+  //   let counter = 0;
     // if (this.getCell(a, b) === 1) {
     //   counter++;
     // }
-    if (this.getCell(a - 1, b - 1) === 1) {
-      counter++;
+    // if (this.getCell(a - 1, b - 1) === 1) {
+    //   counter++;
+    // }
+    // if (this.getCell(a - 1, b) === 1) {
+    //   counter++;
+    // }
+    // if (this.getCell(a - 1, b + 1) === 1) {
+    //   counter++;
+    // }
+  //   if (this.getCell(a, b - 1) === 1) {
+  //     counter++;
+  //   }
+  //   if (this.getCell(a, b + 1) === 1) {
+  //     counter++;
+  //   }
+  //   if (this.getCell(a + 1, b - 1) === 1) {
+  //     counter++;
+  //   }
+  //   if (this.getCell(a + 1, b) === 1) {
+  //     counter++;
+  //   }
+  //   if (this.getCell(a + 1, b + 1) === 1) {
+  //     counter++;
+  //   }
+  //   return counter;
+  // }
+
+
+  forEachCell(iterator) {
+    for (let row = 0; row < this.height; row++) {
+      for (let col = 0; col < this.width; col++) {
+        iterator(row, col);
+      }
     }
-    if (this.getCell(a - 1, b) === 1) {
-      counter++;
-    }
-    if (this.getCell(a - 1, b + 1) === 1) {
-      counter++;
-    }
-    if (this.getCell(a, b - 1) === 1) {
-      counter++;
-    }
-    if (this.getCell(a, b + 1) === 1) {
-      counter++;
-    }
-    if (this.getCell(a + 1, b - 1) === 1) {
-      counter++;
-    }
-    if (this.getCell(a + 1, b) === 1) {
-      counter++;
-    }
-    if (this.getCell(a + 1, b + 1) === 1) {
-      counter++;
-    }
-    return counter;
   }
+
+  livingNeighbors(row, col) {
+    return (
+      // Row Above
+      this.getCell(row - 1, col - 1) +
+      this.getCell(row - 1, col) +
+      this.getCell(row - 1, col + 1) +
+      // Directly to left and right
+      this.getCell(row, col - 1) +
+      this.getCell(row, col + 1) +
+      // Row Below
+      this.getCell(row + 1, col - 1) +
+      this.getCell(row + 1, col) +
+      this.getCell(row + 1, col + 1)
+    );
+  }
+
+
+
+
+
   /**
    * Given the present board, apply the rules to generate a new board
    */
